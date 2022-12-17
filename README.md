@@ -1,6 +1,6 @@
 # <p align= center> Task Me </p>
 
-about :
+
 
 TaskMe is a mobile application developed using the Flutter framework. The app features an aesthetic UI design and utilizes the GetX library to provide a smooth and intuitive user experience. TaskMe allows users to create, read, update, and delete tasks, making it a versatile tool for managing and organizing daily tasks and responsibilities. Whether you need to create a to-do list, schedule appointments, or set reminders, TaskMe has you covered. With its sleek design and powerful features, TaskMe is the perfect companion for staying on top of your busy schedule.
 
