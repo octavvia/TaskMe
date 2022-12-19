@@ -1,0 +1,60 @@
+name: Fleetime Flutter CI/CD Configuration
+
+# Command ini digunakan untuk mentrigger workflow ini menggunakan
+# event push tag pada branch master
+on:
+  push:
+    tags:
+      - "v*.*.*" # on every version tag will build a new android artifact.
+jobs:
+  build:
+    name: Build APK
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      # Menyiapkan Java
+      - name: Setup Java
+        uses: actions/setup-java@v1
+        with:
+          java-version: "12.x"
+
+      # Menyiapkan Flutter dengan menggunakan channel stable
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v1
+        with:
+          channel: "stable"
+
+      # Step yang ini dugnakan yntuk men sign apk/aab supaya dapat di publish ke playstore
+      # Jika tidak ingin sign apk maka bisa di comment saja 2 step ini
+      # Disini saya comment karena scopenya cuma sampai Github saja
+
+      # - name: Decode android/neumodore_key.jks
+      #   run: echo "${{ secrets.KEYSTORE_JKS_PROD }}" | base64 --decode > android/app/keystore.jks
+
+      # - name: Decode android/key.properties
+      #   run: echo "${{ secrets.KEY_PROPERTIES_PROD }}" | base64 --decode > android/key.properties
+
+      # Step ini digunakan untuk mengubah versi pada pubspec.yaml sesuai dengan tag yang di push
+      - name: Replace YAML version with tag version
+        run: |
+          sed -i 's/99.99.99+99/'$GIT_TAG_NAME'/g' pubspec.yaml|
+          echo "Tag used version:"$GIT_TAG_NAME
+
+      # Step ini digunakan untuk menginstall dependency yang dibutuhkan
+      - name: Pub Get Packages
+        run: flutter pub get
+
+      # Step ini digunakan untuk build apk dan split per abi
+      - name: Build APK
+        run: flutter build apk --split-per-abi --release
+
+      # Step ini digunakan untuk build aab
+      - name: Build APPBUNDLE
+        run: flutter build appbundle --release
+
+      # Step ini digunakan untuk merelease apk dan aab ke github release
+      - name: Create Github Release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "build/app/outputs/apk/release/*.apk,build/app/outputs/bundle/release/*.aab"

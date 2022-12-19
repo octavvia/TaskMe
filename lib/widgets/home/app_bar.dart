@@ -13,6 +13,7 @@ class MyAppBar extends StatelessWidget {
       children: [
         CustomCircleContainer(
           child: IconButton(
+            // color: Colors.blue,
             onPressed: pressToOpenDrawer,
             icon: const Icon(Icons.menu_outlined),
           ),

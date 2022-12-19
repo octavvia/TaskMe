@@ -1,5 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.taskme">
+    <uses-permissions>
+        <uses-permission android:name="android.permission.INTERNET" />
+    </uses-permissions>
    <application
         android:label="taskme"
         android:name="${applicationName}"

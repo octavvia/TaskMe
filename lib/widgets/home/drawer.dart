@@ -95,7 +95,7 @@ class DrawerItem extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Icon(icon, color: Colors.amber),
+          Icon(icon, color: Colors.blue),
           const SizedBox(width: 10),
           Text(
             label,
