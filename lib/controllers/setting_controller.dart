@@ -9,11 +9,11 @@ class SettingsController extends GetxController {
   final String _nameKey = "name";
   var username = 'username'.obs;
 
-  static const _uriTwitter = 'https://twitter.com/ICuvula';
-  static const _uriInsta = 'https://www.instagram.com/isaias_cuvula';
+  static const _uriTwitter = 'https://twitter.com/zvtxt';
+  static const _uriInsta = 'https://www.instagram.com/_octavviia';
   static const _uriLinkedIn =
-      'https://bg.linkedin.com/in/isaias-cuvula-988a8a1a9';
-  static const _uriGitHub = 'https://github.com/IsaiasCuvula';
+      'https://www.linkedin.com/in/aulia-octaviani-8ab299229/';
+  static const _uriGitHub = 'https://github.com/vviia';
 
   @override
   void onInit() {
